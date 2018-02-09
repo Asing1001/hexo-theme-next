@@ -16,6 +16,7 @@ $(document).ready(function () {
     appId: algoliaSettings.applicationID,
     apiKey: algoliaSettings.apiKey,
     indexName: algoliaSettings.indexName,
+    urlSync: true,
     searchFunction: function (helper) {
       var searchInput = $('#algolia-search-input').find('input');
 
@@ -103,7 +104,10 @@ $(document).ready(function () {
       .append('<div class="search-popup-overlay algolia-pop-overlay"></div>')
       .css('overflow', 'hidden');
     $('.popup').toggle();
-    $('#algolia-search-input').find('input').focus();
+    var $input = $('#algolia-search-input').find('input');
+    $input.focus();
+    var tempValue = $input.val();
+    $input.val('').val(tempValue);
   });
 
   $('.popup-btn-close').click(function(){
@@ -111,5 +115,8 @@ $(document).ready(function () {
     $('.algolia-pop-overlay').remove();
     $('body').css('overflow', '');
   });
-
+  
+  if(location.search.indexOf('q=')!==-1){
+    $('.popup-trigger').trigger('click');
+  }
 });
