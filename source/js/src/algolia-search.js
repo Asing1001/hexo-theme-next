@@ -117,6 +117,7 @@ $(document).ready(function () {
   });
   
   if(location.search.indexOf('q=')!==-1){
+    $('.site-nav-toggle button').trigger('click');
     $('.popup-trigger').trigger('click');
   }
 });
